@@ -1,18 +1,24 @@
 from datetime import datetime
 import json
+import os
+from shutil import copyfile
 
-end_time = datetime(2022, 1, 1, 20)  # y, m, d, h, min
+backup = 'hosts - Backup'
+working_dir = os.getcwd()
+
+end_time = datetime(2023, 1, 1, 20)  # y, m, d, h, min
 
 sites_to_block = ['www.facebook.com', 'facebook.com']
 sites = {'Facebook': ['www.facebook.com', 'facebook.com'], 'YouTube': ['www.youtube.com']}  # Get this from JSON file
 
 # Path to 'hosts' file in Windows folder
-hosts_path = 'C:/Windows/System32/drivers/etc/hosts'
+hosts_folder = 'C:/Windows/System32/drivers/etc/'
+hosts_path = hosts_folder + 'hosts'
 
-redirect = "127.0.0.1"  # Local host
+redirect = "127.0.0.1"  # Local host (make sure you are not running a local server while using this script)
 
 
-def block_websites():
+def block_websites() -> None:
     if datetime.now() < end_time:
         print("Block sites")
         with open(hosts_path, 'r+') as hostfile:
@@ -31,6 +37,13 @@ def block_websites():
             hostfile.truncate()
 
 
+def create_backup():
+    current_files = os.listdir(hosts_folder)
+    if backup not in current_files:
+        print('creating backup')
+        copyfile(hosts_path, hosts_folder + backup)
+
 # sudo python blocker.py
 if __name__ == '__main__':
+    create_backup()
     block_websites()
