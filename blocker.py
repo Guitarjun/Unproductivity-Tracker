@@ -6,7 +6,7 @@ from shutil import copyfile
 backup = 'hosts - Backup'
 working_dir = os.getcwd()
 
-end_time = datetime(2023, 1, 1, 20)  # y, m, d, h, min
+end_time = datetime(2022, 1, 1, 20)  # y, m, d, h, min
 
 sites_to_block = ['www.facebook.com', 'facebook.com']
 sites = {'Facebook': ['www.facebook.com', 'facebook.com'], 'YouTube': ['www.youtube.com']}  # Get this from JSON file
