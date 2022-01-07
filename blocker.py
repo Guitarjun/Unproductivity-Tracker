@@ -2,6 +2,8 @@ from datetime import datetime
 import os
 from shutil import copyfile
 
+# TODO: Add CRON/start and end times for the script to run
+
 backup = 'hosts - Backup'
 working_dir = os.getcwd()
 
