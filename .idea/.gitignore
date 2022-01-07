@@ -6,5 +6,5 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
-# Websites for blocker
-/websites.json
+# Report
+#/report_log.csv
