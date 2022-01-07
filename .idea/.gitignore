@@ -7,4 +7,4 @@
 /dataSources/
 /dataSources.local.xml
 # Report
-#/report_log.csv
+/report_log.csv

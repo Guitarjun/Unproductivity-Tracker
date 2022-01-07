@@ -1,5 +1,4 @@
 from datetime import datetime
-import json
 import os
 from shutil import copyfile
 
@@ -42,6 +41,7 @@ def create_backup():
     if backup not in current_files:
         print('creating backup')
         copyfile(hosts_path, hosts_folder + backup)
+
 
 # sudo python blocker.py
 if __name__ == '__main__':
