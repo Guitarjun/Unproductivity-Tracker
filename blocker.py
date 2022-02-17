@@ -24,14 +24,14 @@ args = parser.parse_args()
 
 def block_websites() -> None:
     if args.block:
-        print("Blocking all sites...")
+        print("Blocking sites...")
         with open(hosts_path, 'r+') as hostfile:
             hosts_content = hostfile.read()
             for site in sites_to_block:
                 if site not in hosts_content:
                     hostfile.write(redirect + ' ' + site + '\n')
     elif args.unblock:
-        print('Unblocking all sites...')
+        print('Unblocking sites...')
         with open(hosts_path, 'r+') as hostfile:
             lines = hostfile.readlines()
             hostfile.seek(0)
