@@ -1,34 +1,37 @@
-from datetime import datetime
 import os
 from shutil import copyfile
-
-# TODO: Add CRON/start and end times for the script to run
+import argparse
 
 backup = 'hosts - Backup'
 working_dir = os.getcwd()
 
-end_time = datetime(2022, 1, 1, 20)  # y, m, d, h, min
-
-sites_to_block = ['www.facebook.com', 'facebook.com']
-sites = {'Facebook': ['www.facebook.com', 'facebook.com'], 'YouTube': ['www.youtube.com']}  # Get this from JSON file
+# List of URLs to block/unblock
+sites_to_block = []
 
 # Path to 'hosts' file in Windows folder
 hosts_folder = 'C:/Windows/System32/drivers/etc/'
+
 hosts_path = hosts_folder + 'hosts'
 
 redirect = "127.0.0.1"  # Local host (make sure you are not running a local server while using this script)
 
+# Set up arg parser
+parser = argparse.ArgumentParser(description='block or unblock sites')
+parser.add_argument('-b', '--block', action='store_true')
+parser.add_argument('-u', '--unblock', action='store_true')
+args = parser.parse_args()
+
 
 def block_websites() -> None:
-    if datetime.now() < end_time:
-        print("Block sites")
+    if args.block:
+        print("Blocking all sites...")
         with open(hosts_path, 'r+') as hostfile:
             hosts_content = hostfile.read()
             for site in sites_to_block:
                 if site not in hosts_content:
                     hostfile.write(redirect + ' ' + site + '\n')
-    else:
-        print('Unblock sites')
+    elif args.unblock:
+        print('Unblocking all sites...')
         with open(hosts_path, 'r+') as hostfile:
             lines = hostfile.readlines()
             hostfile.seek(0)
@@ -38,7 +41,7 @@ def block_websites() -> None:
             hostfile.truncate()
 
 
-def create_backup():
+def create_backup() -> None:
     current_files = os.listdir(hosts_folder)
     if backup not in current_files:
         print('creating backup')
