@@ -5,13 +5,12 @@ Python CLI to block/unblock access to websites when you need to be productive
 
 **To run this script, you must use `sudo` on Mac or `powershell -Verb runAs` on Windows to elevate yourself to admin**
 
-1. Add the URLs of the websites you want to block/unblock in this list
+Add the URLs of the websites you want to block/unblock in this list
 
 ```python
 # List of URLs to block/unblock
 sites_to_block = []
 ```
-2. 
 
 To _block_ websites, use the `-b` flag:
 ```
