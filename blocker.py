@@ -17,16 +17,20 @@ redirect = "127.0.0.1"  # Local host (make sure you are not running a local serv
 
 # Set up arg parser
 parser = argparse.ArgumentParser(description='block or unblock sites')
-parser.add_argument('-b', '--block', action='store_true')
-parser.add_argument('-u', '--unblock', action='store_true')
-args = parser.parse_args()
 
+parser.add_argument('-b', '--block', action='store_true', help='blocks websites')
+parser.add_argument('-u', '--unblock', action='store_true', help='unblocks websites')
+parser.add_argument('sites', nargs='*')
+args = parser.parse_args()
+if (args.sites):
+    sites_to_block = args.sites
 
 def block_websites() -> None:
     if args.block:
         print("Blocking sites...")
         with open(hosts_path, 'r+') as hostfile:
             hosts_content = hostfile.read()
+
             for site in sites_to_block:
                 if site not in hosts_content:
                     hostfile.write(redirect + ' ' + site + '\n')
